@@ -1,15 +1,12 @@
-use Illuminate\Support\Facades\Auth;
+<?php
 
-public function login(Request $request)
+namespace App\Http\Controllers;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
 {
-    $credentials = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
-        return redirect()->intended('dashboard');
-    }
-
-    return back()->withErrors(['email' => 'Invalid credentials']);
+    use AuthorizesRequests, ValidatesRequests;
 }
