@@ -46,7 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/points', [PointController::class, 'index'])->name('points');
 
     // Missions
+    Route::middleware('auth')->group(function () {
     Route::get('/missions', [MissionController::class, 'index'])->name('missions');
+    });
 
     // Profile (NEW)
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

@@ -25,9 +25,7 @@ class HomeController extends Controller
             ->where('status', 'completed')
             ->sum('weight') / 1000;
 
-        $completedMissions = UserMission::where('user_id', $user->id)
-            ->where('is_completed', true)
-            ->count();
+        $completedMissions = $user->completedMissions()->count();
 
         $activePickups = PickupOrder::where('user_id', $user->id)
             ->whereIn('status', ['pending', 'confirmed', 'on_the_way'])

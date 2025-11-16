@@ -18,4 +18,30 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'points'            => 'integer',
+    ];
+
+    public function missions()
+    {
+        return $this->belongsToMany(Mission::class, 'user_mission')
+                    ->withPivot('is_completed', 'completed_at')
+                    ->withTimestamps();
+    }
+
+    public function completedMissions()
+    {
+        return $this->missions()->wherePivot('is_completed', true);
+    }
+
+    public function getCurrentStreakAttribute()
+    {
+        return $this->completedMissions()
+                    ->orderBy('user_mission.completed_at', 'desc')
+                    ->get()
+                    ->take(7)
+                    ->count();
+    }
 }

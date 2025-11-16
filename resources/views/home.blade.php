@@ -3,7 +3,7 @@
 @section('content')
 <style>
     body {
-        background: linear-gradient(180deg, #7dd3c0 0%, #4a9d8f 100%);
+        background: #f0f9f7;
         min-height: 100vh;
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,17 +14,18 @@
         margin: 0 auto;
         padding: 0;
         min-height: 100vh;
-        background: linear-gradient(180deg, #7dd3c0 0%, #f0f9f7 40%);
+        background: white;
+        padding-bottom: 100px;
     }
 
     /* Welcome Card */
     .welcome-card {
-        background: linear-gradient(135deg, #5eb3a6 0%, #4a9d8f 100%);
+        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
         border-radius: 0 0 30px 30px;
         padding: 2rem 1.5rem;
         color: white;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 20px rgba(125, 211, 192, 0.2);
     }
 
     .profile-section {
@@ -105,6 +106,7 @@
     /* Content Section */
     .content-section {
         padding: 0 1.5rem 2rem;
+        background: white;
     }
 
     /* Fun Fact */
@@ -186,7 +188,7 @@
     .action-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-color: #4a9d8f;
+        border-color: #7dd3c0;
     }
 
     .action-btn.pickup {
@@ -198,7 +200,7 @@
     .action-btn.dropoff {
         background: #e8f8f5;
         color: #4a9d8f;
-        border-color: #4a9d8f;
+        border-color: #7dd3c0;
     }
 
     .action-btn .emoji {
@@ -222,12 +224,13 @@
         border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        text-decoration: none;
     }
 
     .news-image {
         width: 100%;
         height: 200px;
-        background: linear-gradient(135deg, #5eb3a6 0%, #7dd3c0 100%);
+        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -261,6 +264,7 @@
         justify-content: space-around;
         border-radius: 30px 30px 0 0;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 100;
     }
 
     .nav-item {
@@ -369,7 +373,7 @@
     </div>
 </div>
 
-<!-- Bottom Navigation
+<!-- Bottom Navigation -->
 <div class="bottom-nav">
     <a href="/" class="nav-item active">
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -403,7 +407,7 @@
         </svg>
         <span>Profile</span>
     </a>
-</div> -->
+</div>
 
 <!-- Leaflet Map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
