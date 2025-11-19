@@ -91,6 +91,16 @@
         text-align: center;
         font-size: 0.85rem;
         font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: white;
+        display: block;
+    }
+
+    .day-box:hover {
+        background: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
     }
 
     .day-box.active {
@@ -317,10 +327,10 @@
         <div class="streak-calendar">
             @for($i = 6; $i >= 0; $i--)
                 @php $date = now()->subDays($i); @endphp
-                <div class="day-box {{ $date->isToday() ? 'active' : '' }}">
+                <a href="{{ route('streak') }}" class="day-box {{ $date->isToday() ? 'active' : '' }}">
                     <div class="day-name">{{ $date->format('D') }}</div>
                     <div>{{ $date->format('d') }}</div>
-                </div>
+                </a>
             @endfor
         </div>
     </div>

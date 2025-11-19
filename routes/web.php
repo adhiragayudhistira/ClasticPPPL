@@ -8,7 +8,8 @@ use App\Http\Controllers\MissionController;
 use App\Http\Controllers\PickupController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ClassificationController;
-use App\Http\Controllers\ProfileController; // <-- Added
+use App\Http\Controllers\ProfileController; 
+use App\Http\Controllers\StreakController;
 
 // Redirect root to login or home
 Route::get('/', function () {
@@ -42,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dropoff/create', [DropOffController::class, 'create'])->name('dropoff.create');
     Route::post('/dropoff', [DropOffController::class, 'store'])->name('dropoff.store');
 
-    // Point (NOT point.index → use 'points')
+    // Point 
     Route::get('/points', [PointController::class, 'index'])->name('points');
 
     // Missions
@@ -50,6 +51,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/missions', [MissionController::class, 'index'])->name('missions');
     });
 
-    // Profile (NEW)
+    // Profile 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+    //Streak Tracker
+    Route::middleware('auth')->group(function () {
+    Route::get('/streak', [StreakController::class, 'index'])->name('streak');
+});
 });
