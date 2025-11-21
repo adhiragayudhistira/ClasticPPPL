@@ -326,7 +326,7 @@
                 // Store location in session/localStorage
                 sessionStorage.setItem('pickupLocation', JSON.stringify(selectedLocation));
                 // Redirect to schedule page
-                window.location.href = '/pickup/schedule';
+                window.location.href = '{{ route('pickup.schedule') }}';
             }
         });
     });

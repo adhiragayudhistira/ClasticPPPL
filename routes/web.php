@@ -36,7 +36,13 @@ Route::middleware('auth')->group(function () {
     // Pickup
     Route::get('/pickup', [PickupController::class, 'index'])->name('pickup');
     Route::get('/pickup/create', [PickupController::class, 'create'])->name('pickup.create');
+    Route::get('/pickup/location', [PickupController::class, 'location'])->name('pickup.location');
+    Route::get('/pickup/schedule', [PickupController::class, 'schedule'])->name('pickup.schedule');
+    Route::get('/pickup/plastic-type', [PickupController::class, 'plasticType'])->name('pickup.plastic-type');
+    Route::get('/pickup/invoice', [PickupController::class, 'invoice'])->name('pickup.invoice');
     Route::post('/pickup', [PickupController::class, 'store'])->name('pickup.store');
+    Route::get('/pickup/driver-navigation', [PickupController::class, 'driverNavigation'])
+    ->name('pickup.driver-navigation');
 
     // Dropoff
     Route::get('/dropoff', [DropOffController::class, 'index'])->name('dropoff');
