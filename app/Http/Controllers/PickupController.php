@@ -29,7 +29,7 @@ class PickupController extends Controller
      */
     public function schedule()
     {
-        return view('pickup.schedule');
+        return view('pickup.schedule'); 
     }
 
     /**
