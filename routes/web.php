@@ -47,8 +47,13 @@ Route::middleware('auth')->group(function () {
 
     // Dropoff
     Route::get('/dropoff', [DropOffController::class, 'index'])->name('dropoff');
-    Route::get('/dropoff/create', [DropOffController::class, 'create'])->name('dropoff.create');
+    Route::get('/dropoff/location', [DropOffController::class, 'location'])->name('dropoff.location');
+    Route::get('/dropoff/schedule', [DropOffController::class, 'schedule'])->name('dropoff.schedule');
+    Route::get('/dropoff/plastic-type', [DropOffController::class, 'plasticType'])->name('dropoff.plastic-type');
     Route::post('/dropoff', [DropOffController::class, 'store'])->name('dropoff.store');
+    Route::get('/dropoff/{id}/tracker', [DropOffController::class, 'tracker'])->name('dropoff.tracker');
+    Route::get('/dropoff/{id}/invoice', [DropOffController::class, 'invoice'])->name('dropoff.invoice');
+
 
     // Article
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
