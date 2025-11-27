@@ -128,6 +128,17 @@
             position: relative;
         }
         #map { width: 100%; height: 100%; }
+        
+        /* Move Leaflet zoom controls to the right side */
+        .leaflet-control-zoom {
+            margin-right: 10px !important;
+            margin-left: auto !important;
+        }
+        
+        .leaflet-left {
+            left: auto !important;
+            right: 0 !important;
+        }
 
         /* Bottom Section */
         .bottom-section {

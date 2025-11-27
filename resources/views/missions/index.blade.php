@@ -255,7 +255,7 @@
     padding-bottom: 100px;
 }
 
-/* BOTTOM NAVIGATION */
+/* BOTTOM NAVIGATION - Updated to match classify page */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -263,12 +263,12 @@
     transform: translateX(-50%);
     max-width: 480px;
     width: 100%;
-    background: #4a9d8f;
+    background: linear-gradient(to right, #14b8a6, #0d9488);
     padding: 1rem;
     display: flex;
     justify-content: space-around;
     border-radius: 30px 30px 0 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 20px rgba(20, 184, 166, 0.3);
     z-index: 100;
 }
 

@@ -176,17 +176,25 @@
         background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
         border: none;
-        padding: 0.9rem;
+        padding: 1.1rem;
         border-radius: 12px;
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s;
         margin-top: 1rem;
     }
 
-    .confirm-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    .confirm-btn:disabled { background: #99f6e4; cursor: not-allowed; }
+    .confirm-btn:hover { 
+        opacity: 0.9; 
+        transform: translateY(-2px); 
+    }
+    
+    .confirm-btn:disabled { 
+        background: #cbd5e0;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
 
     .error-text {
         color: #e53e3e;

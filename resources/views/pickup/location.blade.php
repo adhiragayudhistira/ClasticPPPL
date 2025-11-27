@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location - Clastic</title>
+    <title>Pickup Location - Clastic</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
@@ -24,7 +24,7 @@
             flex-direction: column;
         }
 
-        /* Header (same style as articles page) */
+        /* Header */
         .header-gradient {
             background: linear-gradient(to right, #14b8a6, #0d9488);
             color: white;
@@ -58,7 +58,7 @@
         }
 
         .header-gradient p {
-            color: #ccfbf1; /* teal-100 */
+            color: #ccfbf1;
             font-size: 0.875rem;
         }
 
@@ -128,6 +128,17 @@
             position: relative;
         }
         #map { width: 100%; height: 100%; }
+        
+        /* Move Leaflet zoom controls to the right side */
+        .leaflet-control-zoom {
+            margin-right: 10px !important;
+            margin-left: auto !important;
+        }
+        
+        .leaflet-left {
+            left: auto !important;
+            right: 0 !important;
+        }
 
         /* Bottom Section */
         .bottom-section {
@@ -149,35 +160,43 @@
         .label { font-size: .875rem; color: #4a5568; }
         .address { font-size: 1rem; font-weight: 600; color: #2d3748; }
 
-       .confirm-btn {
-    width: 100%;
-    background: linear-gradient(to right, #14b8a6, #0d9488); /* sama kayak header */
-    color: white;
-    border: none;
-    padding: 1.1rem;
-    border-radius: 12px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .3s;
-}
+        .confirm-btn {
+            width: 100%;
+            background: linear-gradient(to right, #14b8a6, #0d9488);
+            color: white;
+            border: none;
+            padding: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+        }
 
-.confirm-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
+        .confirm-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
 
-.confirm-btn:disabled {
-    background: #99f6e4; /* versi teal yang lebih pucat saat disabled */
-}
-        .confirm-btn:disabled { background: #cbd5e0; }
+        .confirm-btn:disabled {
+            background: #99f6e4;
+        }
+
+        .location-btn {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            padding: 0 0.9rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <div class="location-container">
 
-        <!-- Header (same style as Articles page, but for Location) -->
+        <!-- Header -->
         <div class="header-gradient">
             <div class="flex items-center mb-2">
                 <a href="javascript:history.back()" class="mr-3">
@@ -244,6 +263,7 @@
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
+            // tombol confirm
             document.getElementById("confirmBtn").addEventListener("click", function () {
                 if (selectedLocation) {
                     sessionStorage.setItem("pickupLocation", JSON.stringify(selectedLocation));
@@ -251,6 +271,7 @@
                 }
             });
 
+            // init map
             map = L.map("map").setView(defaultCoords, 13);
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
             marker = L.marker(defaultCoords, { draggable: true }).addTo(map);
@@ -265,8 +286,54 @@
                 updateLocation(e.latlng.lat, e.latlng.lng, "Selected location");
             });
 
+            // lokasi default
             updateLocation(defaultCoords[0], defaultCoords[1], "Surabaya, East Java");
+
+            // event untuk input address
+            addressInput.addEventListener('input', handleSearch);
+            addressInput.addEventListener('focus', handleSearch);
+
+            // klik di luar dropdown -> tutup
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.input-wrapper')) {
+                    suggestionsDropdown.classList.remove('active');
+                }
+            });
         });
+
+        function handleSearch() {
+            const query = addressInput.value.toLowerCase().trim();
+            const filtered = suggestions.filter(item =>
+                item.name.toLowerCase().includes(query)
+            );
+
+            renderSuggestions(filtered);
+        }
+
+        function renderSuggestions(list) {
+            suggestionsDropdown.innerHTML = '';
+
+            if (!list.length) {
+                suggestionsDropdown.classList.remove('active');
+                return;
+            }
+
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = item.name;
+                div.addEventListener('click', () => {
+                    addressInput.value = item.name;
+                    map.setView([item.lat, item.lng], 15);
+                    marker.setLatLng([item.lat, item.lng]);
+                    updateLocation(item.lat, item.lng, item.name);
+                    suggestionsDropdown.classList.remove('active');
+                });
+                suggestionsDropdown.appendChild(div);
+            });
+
+            suggestionsDropdown.classList.add('active');
+        }
 
         function updateLocation(lat, lng, address) {
             selectedLocation = { lat, lng, address };

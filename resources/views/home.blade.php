@@ -57,6 +57,18 @@
         color: #ffd166;
     }
 
+    .profile-info h2 a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .profile-info h2 a:hover {
+        transform: translateY(-2px);
+        text-shadow: 0 2px 8px rgba(255, 209, 102, 0.5);
+    }
+
     .points-badge {
         display: inline-flex;
         align-items: center;
@@ -202,9 +214,9 @@
     }
 
     .action-btn.pickup {
-        background: #4a9d8f;
-        color: white;
-        border-color: #4a9d8f;
+        background: #e8f8f5;
+        color: #4a9d8f;
+        border-color: #7dd3c0;
     }
 
     .action-btn.dropoff {
@@ -240,11 +252,23 @@
     .news-image {
         width: 100%;
         height: 200px;
-        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
+        background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&h=400&fit=crop');
+        background-size: cover;
+        background-position: center;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 4rem;
+        position: relative;
+    }
+
+    .news-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, transparent 0%, rgba(74, 157, 143, 0.3) 100%);
     }
 
     .news-content {
@@ -259,6 +283,69 @@
     .news-content span {
         font-weight: 600;
     }
+
+    .prose { line-height: 1.8; }
+    .prose p { margin-bottom: 1rem; }
+
+    /* BOTTOM NAVIGATION */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        width: 100%;
+        background: linear-gradient(to right, #14b8a6, #0d9488);
+        padding: 1rem;
+        display: flex;
+        justify-content: space-around;
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 20px rgba(20, 184, 166, 0.3);
+        z-index: 100;
+    }
+
+    .nav-item {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        opacity: 0.75;
+        transition: all 0.25s ease;
+        padding: 0.4rem 0.6rem;
+        border-radius: 10px;
+    }
+
+    .nav-item svg {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .nav-item.active {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+    }
+
+    /* Hover animation */
+    .nav-item:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-item:hover svg {
+        transform: scale(1.15);
+        color: #ffeb3b;
+    }
+
+    @media (max-width: 480px) {
+        .home-container { max-width: 100%; }
+    }
 </style>
 
 <div class="home-container">
@@ -269,7 +356,7 @@
                 👤
             </div>
             <div class="profile-info">
-                <h2>Hi, <span>{{ explode(' ', Auth::user()->name)[0] }}</span>!</h2>
+                <h2>Hi, <a href="{{ route('profile') }}"><span>{{ explode(' ', Auth::user()->name)[0] }}</span></a>!</h2>
                 <div class="points-badge">
                     <span style="font-size: 0.9rem;">2500</span>
                     <span style="font-size: 0.9rem;">PTS</span>
@@ -326,9 +413,7 @@
             <h3>News & Article 📚</h3>
             <a href="/articles" style="text-decoration: none;">
                 <div class="news-card">
-                    <div class="news-image">
-                        ♻️
-                    </div>
+                    <div class="news-image"></div>
                     <div class="news-content">
                         <span>Increase your insight here</span>
                         <span>→</span>
@@ -339,7 +424,7 @@
     </div>
 </div>
 
-      <!-- Bottom Navigation -->
+<!-- Bottom Navigation -->
 <div class="bottom-nav">
     <a href="{{ route('home') }}" 
        class="nav-item {{ Request::is('/') || Request::is('home') ? 'active' : '' }}">
@@ -382,79 +467,6 @@
         <span>Profile</span>
     </a>
 </div>
-
-<style>
-.prose { line-height: 1.8; }
-.prose p { margin-bottom: 1rem; }
-
-.home-container {
-    max-width: 480px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: white;
-    padding-bottom: 100px;
-}
-
-/* BOTTOM NAVIGATION */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 480px;
-    width: 100%;
-    background: #4a9d8f;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    border-radius: 30px 30px 0 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-
-.nav-item {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    opacity: 0.75;
-    transition: all 0.25s ease;
-    padding: 0.4rem 0.6rem;
-    border-radius: 10px;
-}
-
-.nav-item svg {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.25s ease, color 0.25s ease;
-}
-
-.nav-item.active {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
-}
-
-/* Hover animation */
-.nav-item:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
-}
-
-.nav-item:hover svg {
-    transform: scale(1.15);
-    color: #ffeb3b;
-}
-
-@media (max-width: 480px) {
-    .home-container { max-width: 100%; }
-}
-</style>
 
 <!-- Leaflet Map -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />

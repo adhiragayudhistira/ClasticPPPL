@@ -46,6 +46,7 @@
     /* Content */
     .invoice-content {
         padding: 1.5rem;
+        padding-bottom: 2rem;
     }
 
     /* Waste Photo */
@@ -194,6 +195,11 @@
 
     .home-btn:hover {
         background: #5eb3a6;
+    }
+
+    /* Force hide bottom navigation */
+    .bottom-nav {
+        display: none !important;
     }
 
     @media (max-width: 480px) {

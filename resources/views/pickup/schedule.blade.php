@@ -2,38 +2,28 @@
 
 @section('content')
 <style>
-    /* Hilangkan navbar + padding bawah */
-    .fixed, [class*="bottom"], [class*="nav"] { display: none !important; }
-    body { padding-bottom: 0 !important; }
-
-    /* Background tetap hijau-biru sampai bawah */
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(to bottom, #7dd3c0, #4a9d8f);
-        z-index: -2;
+    /* Kunci body supaya gak scroll */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e5f0ee;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
     }
 
-    /* Konten utama */
+    /* Card putih di tengah layar */
     .schedule-container {
         max-width: 480px;
         margin: 0 auto;
-        min-height: 100vh;
+        height: 100vh;
         background: white;
         position: relative;
         z-index: 1;
+        overflow-y: auto;
     }
 
-    /* Body umum */
-    body {
-        background: #f0f9f7;
-        min-height: 100vh;
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* Header sama kayak style Clastic-App */
+    /* Header hijau sama seperti page lain */
     .schedule-header {
         background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
@@ -68,9 +58,9 @@
         font-size: 0.875rem;
     }
 
-    /* Konten */
+    /* Isi halaman */
     .schedule-content {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem 2rem 1.5rem;
     }
 
     .section-title {
@@ -86,48 +76,85 @@
         margin-bottom: 1.5rem;
     }
 
-    /* Box jadwal */
     .schedule-box {
         background: white;
         border: 2px solid #e2e8f0;
         border-radius: 16px;
         padding: 1.5rem;
         margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
     }
 
     .schedule-grid {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 1rem;
+        display: flex;
         align-items: center;
+        gap: 2rem;
     }
 
-    .day-label { font-weight: 600; color: #2d3748; }
-    .time-slots { display: flex; flex-direction: column; gap: 0.5rem; }
-    .time-slot { display: flex; align-items: center; gap: 0.5rem; }
+    .day-label { 
+        font-weight: 600; 
+        color: #2d3748;
+        flex-shrink: 0;
+    }
+    
+    .time-slots { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 0.75rem;
+        flex: 0 1 auto;
+    }
+    
+    .time-slot { 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem; 
+    }
+
     .time-slot input[type="radio"] {
-        width: 18px; height: 18px; accent-color: #14b8a6; cursor: pointer;
+        width: 18px;
+        height: 18px;
+        accent-color: #14b8a6;
+        cursor: pointer;
     }
-    .time-slot label { cursor: pointer; color: #4a5568; font-size: 0.95rem; }
-    .day-code { font-weight: 600; color: #7dd3c0; font-size: 0.9rem; }
 
-    /* Tombol confirm warna sama seperti header */
+    .time-slot label {
+        cursor: pointer;
+        color: #4a5568;
+        font-size: 0.95rem;
+    }
+
+    .day-code {
+        font-weight: 600;
+        color: #7dd3c0;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
     .confirm-btn {
         width: 100%;
         background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
         border: none;
-        padding: 1rem;
+        padding: 1.1rem;
         border-radius: 12px;
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
     }
 
-    .confirm-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    .confirm-btn:disabled { background: #99f6e4; cursor: not-allowed; }
+    .confirm-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    .confirm-btn:disabled {
+        background: #cbd5e0;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
 
     @media (max-width: 480px) {
         .schedule-container { max-width: 100%; }
@@ -146,13 +173,13 @@
             </a>
             <h1 class="text-2xl font-bold">Order</h1>
         </div>
-        <p class="text-teal-100 text-sm">Determine your pickup schedule</p>
+        <p class="text-teal-100 text-sm">Determine your pick up schedule</p>
     </div>
 
     <!-- Konten -->
     <div class="schedule-content">
         <h2 class="section-title">Schedule</h2>
-        <p class="section-subtitle">Choose your preferred time for collection</p>
+        <p class="section-subtitle">Determine your pick up schedule</p>
 
         <div class="schedule-box">
             <div class="schedule-grid">
@@ -191,7 +218,9 @@
         confirmBtn.addEventListener('click', function() {
             const selected = document.querySelector('input[name="schedule"]:checked');
             if (selected) {
+                // simpan jadwal pickup di browser
                 sessionStorage.setItem('pickupSchedule', selected.value);
+                // lanjut ke halaman plastic type pickup
                 window.location.href = '/pickup/plastic-type';
             }
         });

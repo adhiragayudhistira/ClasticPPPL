@@ -85,18 +85,34 @@
         border-radius: 16px;
         padding: 1.5rem;
         margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
     }
 
     .schedule-grid {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 1rem;
+        display: flex;
         align-items: center;
+        gap: 2rem;
     }
 
-    .day-label { font-weight: 600; color: #2d3748; }
-    .time-slots { display: flex; flex-direction: column; gap: 0.5rem; }
-    .time-slot { display: flex; align-items: center; gap: 0.5rem; }
+    .day-label { 
+        font-weight: 600; 
+        color: #2d3748;
+        flex-shrink: 0;
+    }
+    
+    .time-slots { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 0.75rem;
+        flex: 0 1 auto;
+    }
+    
+    .time-slot { 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem; 
+    }
 
     .time-slot input[type="radio"] {
         width: 18px;
@@ -114,7 +130,8 @@
     .day-code {
         font-weight: 600;
         color: #7dd3c0;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        flex-shrink: 0;
     }
 
     .confirm-btn {
@@ -122,9 +139,9 @@
         background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
         border: none;
-        padding: 1rem;
+        padding: 1.1rem;
         border-radius: 12px;
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s;
@@ -137,8 +154,9 @@
     }
 
     .confirm-btn:disabled {
-        background: #99f6e4;
+        background: #cbd5e0;
         cursor: not-allowed;
+        opacity: 0.6;
     }
 
     @media (max-width: 480px) {

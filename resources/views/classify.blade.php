@@ -21,37 +21,22 @@
 
     /* Header */
     .header {
-        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
-        padding: 1rem 1.5rem;
+        background: linear-gradient(to right, #14b8a6, #0d9488);
+        padding: 1.5rem 1.5rem;
         color: white;
-        font-size: 1.25rem;
-        font-weight: 600;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 10px rgba(125, 211, 192, 0.3);
+        box-shadow: 0 2px 10px rgba(20, 184, 166, 0.3);
     }
 
-    .help-button {
-        background: rgba(255, 255, 255, 0.3);
-        color: white;
-        border: 2px solid white;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
+    .header h1 {
         font-size: 1.5rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
     }
 
-    .help-button:hover {
-        background: white;
-        color: #5eb3a6;
-        transform: rotate(15deg) scale(1.1);
+    .header p {
+        color: #ccfbf1;
+        font-size: 0.875rem;
+        margin: 0;
     }
 
     /* Content */
@@ -218,16 +203,16 @@
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
+        background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
         border: 2px solid transparent;
-        box-shadow: 0 4px 15px rgba(125, 211, 192, 0.3);
+        box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
         position: relative;
     }
 
     .btn-primary:hover {
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(125, 211, 192, 0.4);
+        box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
     }
 
     .btn-primary:active {
@@ -421,7 +406,66 @@
         display: none !important;
     }
 
+    /* Bottom Navigation - Matching App Style */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        width: 100%;
+        background: linear-gradient(to right, #14b8a6, #0d9488);
+        padding: 1rem;
+        display: flex;
+        justify-content: space-around;
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 20px rgba(20, 184, 166, 0.3);
+        z-index: 100;
+    }
+
+    .nav-item {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        opacity: 0.75;
+        transition: all 0.25s ease;
+        padding: 0.4rem 0.6rem;
+        border-radius: 10px;
+    }
+
+    .nav-item svg {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .nav-item.active {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+    }
+
+    .nav-item:hover {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-item:hover svg {
+        transform: scale(1.15);
+        color: #ffeb3b;
+    }
+
     @media (max-width: 480px) {
+        .classify-container {
+            max-width: 100%;
+        }
+    }px) {
         .classify-container {
             max-width: 100%;
         }
@@ -429,12 +473,10 @@
 </style>
 
 <div class="classify-container">
-     <!-- Header -->
-    <div class="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-6 shadow-lg">
-        <div class="flex items-center mb-2">
-            <h1 class="text-2xl font-bold">Classify Plastic</h1>
-        </div>
-        <p class="text-teal-100 text-sm">Scan your plastic waste and help reduce pollution</p>
+    <!-- Header -->
+    <div class="header">
+        <h1>Classify Plastic</h1>
+        <p>Scan your plastic waste and help reduce pollution</p>
     </div>
 
     <!-- Main Content -->
@@ -499,7 +541,7 @@
     </div>
 </div>
 
-       <!-- Bottom Navigation -->
+<!-- Bottom Navigation -->
 <div class="bottom-nav">
     <a href="{{ route('home') }}" 
        class="nav-item {{ Request::is('/') || Request::is('home') ? 'active' : '' }}">
@@ -542,79 +584,6 @@
         <span>Profile</span>
     </a>
 </div>
-
-<style>
-.prose { line-height: 1.8; }
-.prose p { margin-bottom: 1rem; }
-
-.home-container {
-    max-width: 480px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: white;
-    padding-bottom: 100px;
-}
-
-/* BOTTOM NAVIGATION */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 480px;
-    width: 100%;
-    background: #4a9d8f;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    border-radius: 30px 30px 0 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-
-.nav-item {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    opacity: 0.75;
-    transition: all 0.25s ease;
-    padding: 0.4rem 0.6rem;
-    border-radius: 10px;
-}
-
-.nav-item svg {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.25s ease, color 0.25s ease;
-}
-
-.nav-item.active {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
-}
-
-/* Hover animation */
-.nav-item:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
-}
-
-.nav-item:hover svg {
-    transform: scale(1.15);
-    color: #ffeb3b;
-}
-
-@media (max-width: 480px) {
-    .home-container { max-width: 100%; }
-}
-</style>
 
 <script>
     let photoFile = null;
