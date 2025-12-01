@@ -272,7 +272,7 @@
 
         <div class="schedule-box">
             <div class="schedule-grid">
-                <div class="day-label">Today</div>
+                <div class="day-label">woy</div>
                 <div class="time-display" id="selectedTime">08:00 - 10:00</div>
                 <div class="day-code">WIB</div>
             </div>
