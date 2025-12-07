@@ -11,31 +11,34 @@
 
         body {
             background: #f0f9f7;
-            min-height: 100vh;
+            height: 100vh;                 /* Full screen */
+            overflow: hidden;              /* Prevent scrolling */
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .location-container {
             max-width: 480px;
             margin: 0 auto;
-            min-height: 100vh;
+            height: 100vh;                 /* Full height */
             background: white;
             display: flex;
             flex-direction: column;
+            overflow: hidden;              /* Prevent inner scrolling */
         }
 
         /* Header */
         .header-gradient {
             background: linear-gradient(to right, #14b8a6, #0d9488);
             color: white;
-            padding: 1.5rem 1.5rem;
+            padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;                /* Keep fixed height */
         }
 
         .header-gradient .flex {
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;        /* Make consistent height */
         }
 
         .header-gradient a {
@@ -46,27 +49,12 @@
             text-decoration: none;
         }
 
-        .header-gradient svg {
-            width: 24px;
-            height: 24px;
-            stroke-width: 2;
-        }
-
-        .header-gradient h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .header-gradient p {
-            color: #ccfbf1;
-            font-size: 0.875rem;
-        }
-
         /* Search Section */
         .search-section {
             padding: 1.25rem 1.5rem;
             background: white;
             z-index: 999;
+            flex-shrink: 0;                /* Fixed */
         }
 
         .search-container { display: flex; gap: 0.75rem; }
@@ -82,11 +70,6 @@
             transition: .3s;
             background: white;
             color: #2d3748;
-        }
-
-        .search-input:focus {
-            border-color: #7dd3c0;
-            box-shadow: 0 0 0 3px rgba(125, 211, 192, 0.1);
         }
 
         /* Suggestions Dropdown */
@@ -106,35 +89,40 @@
         }
 
         .suggestions-dropdown.active { display: block; }
+
         .suggestion-item {
             padding: 1rem 1.25rem;
             cursor: pointer;
             border-bottom: 1px solid #f7fafc;
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
         }
-        .suggestion-item:hover { background: #f0f9f7; }
-        .suggestion-item::before { content: "📍"; font-size: 1.1rem; }
 
-        /* Map Section */
-        .map-section { padding: 0 1.5rem 1rem 1.5rem; }
+        /* MAP SECTION — fills remaining height */
+        .map-section {
+            padding: 0 1.5rem 1rem 1.5rem;
+            flex: 1;                        /* TAKE ALL REMAINING VERTICAL SPACE */
+            display: flex;
+        }
+
         .map-container {
             width: 100%;
-            height: 700px;
+            height: 100%;                   /* FIT REMAINING HEIGHT */
             border-radius: 16px;
             overflow: hidden;
             border: 2px solid #e2e8f0;
             position: relative;
         }
-        #map { width: 100%; height: 100%; }
-        
-        /* Move Leaflet zoom controls to the right side */
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Move Leaflet zoom controls to right side */
         .leaflet-control-zoom {
             margin-right: 10px !important;
             margin-left: auto !important;
         }
-        
+
         .leaflet-left {
             left: auto !important;
             right: 0 !important;
@@ -142,9 +130,9 @@
 
         /* Bottom Section */
         .bottom-section {
-            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            padding: 1rem 1.5rem 1.5rem;
             background: white;
-            z-index: 998;
+            flex-shrink: 0;                 /* Fixed height */
         }
 
         .selected-location {
@@ -157,9 +145,6 @@
 
         .selected-location.active { display: block; }
 
-        .label { font-size: .875rem; color: #4a5568; }
-        .address { font-size: 1rem; font-weight: 600; color: #2d3748; }
-
         .confirm-btn {
             width: 100%;
             background: linear-gradient(to right, #14b8a6, #0d9488);
@@ -169,25 +154,6 @@
             border-radius: 12px;
             font-size: 1.05rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: .3s;
-        }
-
-        .confirm-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .confirm-btn:disabled {
-            background: #99f6e4;
-        }
-
-        .location-btn {
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            padding: 0 0.9rem;
-            font-size: 1.2rem;
             cursor: pointer;
         }
     </style>
@@ -263,7 +229,6 @@
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
-            // tombol confirm
             document.getElementById("confirmBtn").addEventListener("click", function () {
                 if (selectedLocation) {
                     sessionStorage.setItem("pickupLocation", JSON.stringify(selectedLocation));
@@ -271,7 +236,6 @@
                 }
             });
 
-            // init map
             map = L.map("map").setView(defaultCoords, 13);
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
             marker = L.marker(defaultCoords, { draggable: true }).addTo(map);
@@ -286,14 +250,11 @@
                 updateLocation(e.latlng.lat, e.latlng.lng, "Selected location");
             });
 
-            // lokasi default
             updateLocation(defaultCoords[0], defaultCoords[1], "Surabaya, East Java");
 
-            // event untuk input address
             addressInput.addEventListener('input', handleSearch);
             addressInput.addEventListener('focus', handleSearch);
 
-            // klik di luar dropdown -> tutup
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.input-wrapper')) {
                     suggestionsDropdown.classList.remove('active');
@@ -306,7 +267,6 @@
             const filtered = suggestions.filter(item =>
                 item.name.toLowerCase().includes(query)
             );
-
             renderSuggestions(filtered);
         }
 
