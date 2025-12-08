@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    /* MAP FIX - Prevent overlap with bottom nav */
+    /* MAP */
     .map-container {
         background: white;
         border-radius: 20px;
@@ -20,27 +20,62 @@
         position: relative;
         z-index: 1;
     }
-
-    /* Make sure bottom nav stays on top */
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 480px;
-        width: 100%;
+    
+    .welcome-card {
         background: linear-gradient(to right, #14b8a6, #0d9488);
-        display: flex;
-        justify-content: space-around;
-        border-radius: 30px 30px 0 0;
-        box-shadow: 0 -4px 20px rgba(20, 184, 166, 0.3);
-        z-index: 100;
+        border-radius: 0 0 24px 24px;
+        padding: 1rem 1.2rem;        /* smaller */
+        color: white;
+        margin-bottom: 1rem;         /* smaller */
+        box-shadow: 0 4px 15px rgba(13, 148, 136, 0.20);
     }
 
-    /* Add padding to content so it doesn't hide behind nav */
-    .content-section {
-        padding: 0 1.5rem 6rem 1.5rem;
+    .profile-section {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.75rem;      /* smaller */
+    }
+
+    .profile-pic {
+        width: 55px;                 /* smaller */
+        height: 55px;
+        border-radius: 12px;
         background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info h2 {
+        margin: 0;
+        font-size: 1.2rem;           
+        font-weight: 600;
+    }
+
+    .profile-info h2 span {
+        color: #ffd166;
+    }
+
+    .profile-info h2 a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+    }
+
+    .points-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: white;
+        color: #4a9d8f;
+        padding: 0.35rem 0.9rem;     
+        border-radius: 15px;
+        font-weight: 700;
+        font-size: 0.9rem;           
+        margin-top: 0.25rem;
     }
 </style>
 
