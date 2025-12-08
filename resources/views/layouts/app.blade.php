@@ -7,6 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    <body class="{{ Request::is('points/success') ? 'success-body' : '' }}">
     <div class="home-container">
         @yield('content')
     </div>

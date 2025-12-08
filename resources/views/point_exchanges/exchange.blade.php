@@ -1,78 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
 <style>
-    .fixed, [class*="bottom-"], [class*="nav"] { display: none !important; }
-    body { background: linear-gradient(to bottom, #7dd3c0, #4a9d8f) !important; min-height: 100vh; }
-    .wrapper { max-width: 480px; margin: 0 auto; background: white; min-height: 100vh; overflow: hidden; }
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
-    .main-card { border-radius: 3rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-
-    /* Hover & Selected Style untuk tombol metode */
-    .method-btn {
-        transition: all 0.25s ease;
-    }
-    .method-btn:hover {
-        background-color: #ccfbf1; /* teal-100 */
-        transform: translateY(-2px);
-        box-shadow: 0 3px 10px rgba(13, 148, 136, 0.2);
-    }
-    .method-btn.selected {
-        background-color: #14b8a6; /* teal-500 */
-        color: white;
-        border-color: #14b8a6;
-        box-shadow: 0 3px 12px rgba(20, 184, 166, 0.35);
-    }
-
-    /* MODAL STYLE */
-    .modal-bg {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.4);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-    .modal-box {
-        background: white;
-        border-radius: 1rem;
-        width: 85%;
-        max-width: 400px;
-        padding: 1.5rem;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .modal-box input {
-        width: 100%;
-        border: 2px solid #d1d5db;
-        border-radius: 0.75rem;
-        padding: 0.75rem;
-        margin-top: 0.75rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        font-size: 1rem;
-        color: #374151;
-    }
-    .modal-box button {
-        background: #14b8a6;
-        color: white;
-        font-weight: 600;
-        border: none;
-        border-radius: 0.75rem;
-        width: 100%;
-        padding: 0.75rem;
-        transition: background 0.2s ease;
-    }
-    .modal-box button:hover {
-        background: #0d9488;
-    }
+/* Sembunyiin bottom nav di layout */
+    .fixed, [class*="bottom"], [class*="nav"] { display: none !important; }
 </style>
 
-<div class="wrapper">
+<div class="wrapper exchange-page">
 
     <!-- Header -->
     <div class="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-6">
@@ -161,25 +96,25 @@
             : 'Rp 0';
     });
 
-    // Pilih metode
-    methods.forEach(btn => {
-        btn.addEventListener('click', function() {
-            methods.forEach(b => b.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedMethod = this.textContent.trim();
+// Pilih metode
+methods.forEach(btn => {
+    btn.addEventListener('click', function() {
+        methods.forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedMethod = this.textContent.trim();
 
-            const points = parseInt(input.value) || 0;
-            if (!points || points < 100) {
-                alert("Please enter at least 100 points before selecting withdraw method.");
-                return;
-            }
+        const points = parseInt(input.value) || 0;
+        if (!points || points < 100) {
+            alert("Please enter at least 100 points before selecting withdraw method.");
+            return;
+        }
 
-            // Tampilkan modal
-            pointsDisplay.textContent = points.toLocaleString('id-ID');
-            amountDisplay.textContent = 'Rp ' + (points * 100).toLocaleString('id-ID');
-            modal.style.display = 'flex';
-        });
+        // Tampilkan modal
+        pointsDisplay.textContent = points.toLocaleString('id-ID');
+        amountDisplay.textContent = 'Rp ' + (points * 100).toLocaleString('id-ID');
+        modal.style.display = 'flex'; // ini udah bener
     });
+});
 
     // Klik Proceed
     proceedBtn.addEventListener('click', function() {
@@ -198,7 +133,7 @@
         modal.style.display = 'none';
         window.location.href = '/points/success';
     });
-
+    
     // Klik luar modal = close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) modal.style.display = 'none';

@@ -1,29 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <style>
-    .fixed, [class*="bottom-"], [class*="nav"] { display: none !important; }
-    body { background: linear-gradient(to bottom, #7dd3c0, #4a9d8f) !important; min-height: 100vh; }
-    .wrapper { max-width: 480px; margin: 0 auto; background: white; min-height: 100vh; }
-
-    .checkmark {
-        width: 80px; height: 80px; background: #14b8a6; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        margin: 1.5rem auto .75rem; box-shadow: 0 6px 18px rgba(20,184,166,.35);
-    }
-    .checkmark svg { width: 44px; height: 44px; color: #fff; stroke-width: 4; }
-
-    .info-box {
-        background: #f8fafc; border-radius: 20px; padding: 1.25rem 1.5rem;
-        border: 1px solid #e2e8f0; margin: 0 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.05);
-    }
-    .info-row { display: flex; justify-content: space-between; padding: .75rem 0; border-bottom: 1px solid #e2e8f0; font-size: .9rem; }
-    .info-row:last-child { border-bottom: 0; }
-    .info-label { color: #64748b; }
-    .info-value { color: #1e293b; font-weight: 600; text-align: right; }
+/* Sembunyiin bottom nav di layout */
+    .fixed, [class*="bottom"], [class*="nav"] { display: none !important; }
 </style>
 
-<div class="wrapper">
+<div class="success-wrapper">
+
  <!-- Header -->
 <div class="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-6 shadow-lg">
     <div class="flex items-center mb-2">
@@ -45,7 +30,7 @@
         </div>
 
         <!-- Info -->
-        <h3 class="text-center text-gray-800 font-semibold mb-4 text-lg">Information</h3>
+        <h3 class="text-center text-gray-800 font-bold mb-4 text-lg">Information</h3>
         <div class="info-box">
             <!-- 1) Amount Received -->
             <div class="info-row">
@@ -67,7 +52,7 @@
 
             <div class="info-row">
                 <span class="info-label">Location:</span>
-                <span class="info-value">Blitar, East Java</span>
+                <span class="info-value">Surabaya, East Java</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Date:</span>
