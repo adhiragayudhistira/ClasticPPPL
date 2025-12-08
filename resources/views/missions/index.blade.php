@@ -255,7 +255,6 @@
     padding-bottom: 100px;
 }
 
-/* BOTTOM NAVIGATION - Updated to match classify page */
 .bottom-nav {
     position: fixed;
     bottom: 0;

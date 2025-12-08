@@ -17,15 +17,34 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-    /* COMMON CONTAINER */
-  .home-container {
+    /* Override parent container constraints */
+body > div,
+#app,
+.min-h-screen {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Make sure schedule container is the only centered element */
+.schedule-container {
     max-width: 480px;
     margin: 0 auto;
+    height: 100vh;
     background: white;
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* ganti dari min-height ke height */
-    overflow: auto;
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+    box-sizing: border-box; /* Important! */
+}
+
+.schedule-header {
+    background: linear-gradient(to right, #14b8a6, #0d9488);
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Important! */
+    width: 100%;
 }
     /* WELCOME CARD - Home Page */
     .welcome-card {

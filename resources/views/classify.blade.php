@@ -406,7 +406,7 @@
         display: none !important;
     }
 
-    /* Bottom Navigation - Matching App Style */
+    /* Bottom Navigation - Matching App Style
     .bottom-nav {
         position: fixed;
         bottom: 0;
@@ -469,7 +469,7 @@
         .classify-container {
             max-width: 100%;
         }
-    }
+    } */
 </style>
 
 <div class="classify-container">

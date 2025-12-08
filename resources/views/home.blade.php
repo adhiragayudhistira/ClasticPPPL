@@ -1,6 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    /* MAP FIX - Prevent overlap with bottom nav */
+    .map-container {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        height: 250px;
+        position: relative;
+        z-index: 1;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Make sure bottom nav stays on top */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        width: 100%;
+        background: linear-gradient(to right, #14b8a6, #0d9488);
+        display: flex;
+        justify-content: space-around;
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 20px rgba(20, 184, 166, 0.3);
+        z-index: 100;
+    }
+
+    /* Add padding to content so it doesn't hide behind nav */
+    .content-section {
+        padding: 0 1.5rem 6rem 1.5rem;
+        background: white;
+    }
+</style>
 
 <div class="welcome-card">
     <div class="profile-section">

@@ -15,24 +15,25 @@
         overflow: hidden;   /* <-- ini yg bikin gak bisa scroll */
     }
 
-    /* Card putih di tengah layar */
     .schedule-container {
-        max-width: 480px;
-        margin: 0 auto;
-        height: 100vh;       /* pas 1 layar */
-        background: white;
-        position: relative;
-        z-index: 1;
-        overflow-y: auto;    /* kalau nanti konten kepanjangan, yg scroll cuma kotak ini */
-    }
+    max-width: 480px;
+    margin: 0 auto;
+    height: 100vh;
+    background: white;
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;  /* Add this - prevents horizontal overflow */
+}
 
-    /* Header hijau sama seperti page lain */
-    .schedule-header {
-        background: linear-gradient(to right, #14b8a6, #0d9488);
-        color: white;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+.schedule-header {
+    background: linear-gradient(to right, #14b8a6, #0d9488);
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;  /* Explicitly set to 100% of parent */
+    box-sizing: border-box;  /* Include padding in width calculation */
+}
 
     .schedule-header .flex {
         display: flex;
