@@ -2,6 +2,8 @@
 
 @section('content')
 <style>
+    .fixed, [class*="bottom"], [class*="nav"] { display: none !important; }
+    
     /* Kunci body supaya gak scroll */
     html, body {
         margin: 0;

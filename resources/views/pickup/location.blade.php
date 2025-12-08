@@ -30,15 +30,14 @@
         .header-gradient {
             background: linear-gradient(to right, #14b8a6, #0d9488);
             color: white;
-            padding: 1.5rem;
+            padding: 1.5rem 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            flex-shrink: 0;                /* Keep fixed height */
         }
 
         .header-gradient .flex {
             display: flex;
             align-items: center;
-            margin-bottom: 0.25rem;        /* Make consistent height */
+            margin-bottom: 0.5rem;
         }
 
         .header-gradient a {
@@ -47,6 +46,22 @@
             margin-right: 0.75rem;
             color: white;
             text-decoration: none;
+        }
+
+        .header-gradient svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .header-gradient h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-gradient p {
+            color: #ccfbf1;
+            font-size: 0.875rem;
         }
 
         /* Search Section */

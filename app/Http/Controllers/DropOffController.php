@@ -47,7 +47,6 @@ class DropOffController extends Controller
     // SUBMIT – SIMPAN KE DB
     public function store(Request $request)
     {
-        // VALIDASI SIMPLE DULU
         $validated = $request->validate([
             'address'      => 'nullable|string|max:255',
             'latitude'     => 'nullable|numeric|between:-90,90',
@@ -66,12 +65,10 @@ class DropOffController extends Controller
             return back()->withErrors('Isi minimal salah satu berat plastik, bro 😅');
         }
 
-        // hitung poin simple: 100 poin/kg HDPE, 80 poin/kg PVC
         $points = $this->calculatePoints($hdpe, $pvc);
 
-        // SIMPAN KE DB TANPA RELASI USER
         $dropoff = Dropoff::create([
-            'user_id'        => Auth::id(), // ga perlu relasi di User.php
+            'user_id'        => Auth::id(), 
             'transaction_code' => $this->generateTransactionCode(),
             'address'        => $validated['address'] ?? null,
             'latitude'       => $validated['latitude'] ?? null,
@@ -84,13 +81,8 @@ class DropOffController extends Controller
             'status'         => 'processed',
         ]);
 
-        // NOTE: ga usah increment ke users.points dulu, biar aman
-
-        // HABIS SIMPAN → KE TRACKER
         return redirect()->route('dropoff.tracker', $dropoff->id);
     }
-
-    // TRACKER PAGE
     public function tracker($id)
     {
         $dropoff = Dropoff::findOrFail($id);
@@ -98,15 +90,12 @@ class DropOffController extends Controller
         return view('dropoff.tracker', compact('dropoff'));
     }
 
-    // INVOICE PAGE
     public function invoice($id)
     {
         $dropoff = Dropoff::findOrFail($id);
 
         return view('dropoff.invoice', compact('dropoff'));
     }
-
-    // ===== HELPER: KODE TRANSAKSI & POINTS =====
 
     private function generateTransactionCode(): string
     {

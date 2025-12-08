@@ -2,6 +2,8 @@
 
 @section('content')
 <style>
+    .fixed, [class*="bottom"], [class*="nav"] { display: none !important; }
+    
     body {
         background: #f0f9f7;
         min-height: 100vh;

@@ -2,6 +2,13 @@
 
 @section('content')
 <style>
+    .bottom-nav,
+    .navbar-bottom,
+    footer nav,
+    [class*="navigation-bottom"] {
+        display: none !important;
+    }
+
     body {
         background: #f0f9f7;
         min-height: 100vh;
@@ -16,14 +23,17 @@
         background: white;
     }
 
-    /* Header */
     .navigation-header {
-        background: #7dd3c0;
-        padding: 1rem 1.5rem;
+    background: linear-gradient(to right, #14b8a6, #0d9488);
+    color: white;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .navigation-header .flex {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        color: white;
+        margin-bottom: 0.5rem;
     }
 
     .back-btn {
@@ -35,12 +45,20 @@
         padding: 0;
         display: flex;
         align-items: center;
+        margin-right: 0.75rem;
+        text-decoration: none;
     }
 
     .navigation-header h1 {
         margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .navigation-header p {
+        color: #ccfbf1;
+        font-size: 0.875rem;
+        margin: 0;
     }
 
     /* Content */
@@ -186,7 +204,7 @@
     /* View Invoice Button */
     .invoice-btn {
         width: 100%;
-        background: #7dd3c0;
+        background: linear-gradient(to right, #14b8a6, #0d9488);
         color: white;
         border: none;
         padding: 1rem;
@@ -212,10 +230,13 @@
 <div class="navigation-container">
     <!-- Header -->
     <div class="navigation-header">
-        <button class="back-btn" onclick="window.location.href='/'">
-            ←
-        </button>
-        <h1>Order</h1>
+        <div class="flex">
+            <button class="back-btn" onclick="window.location.href='/'">
+                ←
+            </button>
+            <h1>Order</h1>
+        </div>
+        <p>Track your driver location</p>
     </div>
 
     <!-- Content -->

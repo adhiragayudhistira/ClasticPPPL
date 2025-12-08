@@ -16,14 +16,17 @@
         background: white;
     }
 
-    /* Header */
     .invoice-header {
-        background: #7dd3c0;
-        padding: 1rem 1.5rem;
+    background: linear-gradient(to right, #14b8a6, #0d9488);
+    color: white;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .invoice-header .flex {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        color: white;
+        margin-bottom: 0.5rem;
     }
 
     .back-btn {
@@ -35,12 +38,20 @@
         padding: 0;
         display: flex;
         align-items: center;
+        margin-right: 0.75rem;
+        text-decoration: none;
     }
 
     .invoice-header h1 {
         margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .invoice-header p {
+        color: #ccfbf1;
+        font-size: 0.875rem;
+        margin: 0;
     }
 
     /* Content */
@@ -135,7 +146,7 @@
 
     /* Points Earned */
     .points-section {
-        background: linear-gradient(135deg, #7dd3c0 0%, #5eb3a6 100%);
+        background: linear-gradient(to right, #14b8a6, #0d9488);
         border-radius: 16px;
         padding: 1.5rem;
         text-align: center;
@@ -212,11 +223,14 @@
 <div class="invoice-container">
     <!-- Header -->
     <div class="invoice-header">
-        <button class="back-btn" onclick="window.history.back()">
+    <div class="flex">
+        <button class="back-btn" onclick="window.location.href='/'">
             ←
         </button>
         <h1>Invoice</h1>
     </div>
+    <p>Check your invoice below!</p>
+</div>
 
     <!-- Content -->
     <div class="invoice-content">

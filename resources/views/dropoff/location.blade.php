@@ -121,7 +121,7 @@
         .map-section { padding: 0 1.5rem 1rem 1.5rem; }
         .map-container {
             width: 100%;
-            height: 700px;
+            height: 350px;
             border-radius: 16px;
             overflow: hidden;
             border: 2px solid #e2e8f0;
